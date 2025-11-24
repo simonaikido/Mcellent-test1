@@ -1,0 +1,169 @@
+dn: dc=bim,dc=com
+objectClass: top
+objectClass: domain
+dc: bim
+
+dn: ou=empleados,dc=bim,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: empleados
+
+dn: ou=clientes,dc=bim,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: clientes
+
+dn: ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: regiones
+
+dn: ou=sistemas,dc=bim,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: sistemas
+
+dn: ou=roles,dc=bim,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: roles
+
+dn: uid=ecastillo@mcllent.com,ou=empleados,dc=bim,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Erick Castillo
+sn: Erick
+uid: ecastillo@mcllent.com
+userPassword: $2a$10$/HLQ3NwAAEJC2unXWTTiTepQDpmV734C7ZtwnaY8f56C4A8SOpgKa
+
+dn: uid=gjarquin@mclient.com,ou=empleados,dc=bim,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Guadalupe Jarquin
+sn: Guadalupe
+uid: gjarquin@mclient.com
+userPassword: {CRYPT}$2a$10$/HLQ3NwAAEJC2unXWTTiTepQDpmV734C7ZtwnaY8f56C4A8SOpgKa
+
+dn: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Erick Legal
+sn: Legal
+uid: ecastilloLegal@mclient.com
+userPassword: a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3
+
+dn: cn=seif,ou=sistemas,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: seif-int
+member: uid=ecastillo@mcllent.com,ou=empleados,dc=bim,dc=com
+member: uid=gjarquin@mclient.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=seif-cliente,ou=sistemas,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: seif-ext
+member: uid=ecastillo@mcllent.com,ou=empleados,dc=bim,dc=com
+
+
+dn: cn=mty,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: mty
+member: uid=ecastillo2@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=vallarta,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: vallarta
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=cdmx,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: cdmx
+member: uid=ecastillo@mcllent.com,ou=empleados,dc=bim,dc=com
+member: uid=gjarquin@mclient.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=qro,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: qro
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=gdl,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: gdl
+member: uid=ecastillo2@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=cancun,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: cancun
+member: uid=ecastillo2@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=puebla,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: puebla
+member: uid=ecastillo2@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=cln,ou=regiones,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: cln
+member: uid=ecastillo2@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=merida,ou=regiones,dc=bim,dc=com
+objectclass: groupOfNames
+cn: merida
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=DG,ou=roles,dc=bim,dc=com
+objectclass: groupOfNames
+cn: DG
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=DF,ou=roles,dc=bim,dc=com
+objectclass: groupOfNames
+cn: DF
+description: Director general
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=SDF,ou=roles,dc=bim,dc=com
+objectclass: groupOfNames
+cn: SDF
+description: Subdirector fiduciario
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=GA,ou=roles,dc=bim,dc=com
+objectclass: groupOfNames
+cn: GA
+description: Gerente administrativo
+member: uid=gjarquin@mclient.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=GL,ou=roles,dc=bim,dc=com
+objectclass: groupOfNames
+cn: GL
+description: Gerente tecnico legal
+member: uid=ecastillo2@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=EA,ou=roles,dc=bim,dc=com
+objectclass: groupOfNames
+cn: EA
+description: Ejecutivo administrativo
+member: uid=ecastillo@mcllent.com,ou=empleados,dc=bim,dc=com
+
+dn: cn=EL,ou=roles,dc=bim,dc=com
+objectclass: top
+objectclass: groupOfNames
+cn: EL
+description: Ejecutivo legal
+member: uid=ecastilloLegal@mcllent.com,ou=empleados,dc=bim,dc=com

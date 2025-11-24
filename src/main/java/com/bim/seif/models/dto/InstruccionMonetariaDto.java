@@ -1,0 +1,27 @@
+package com.bim.seif.models.dto;
+
+import lombok.Data;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+public class InstruccionMonetariaDto implements Serializable {
+    private String folio;
+    private InstruccionDto instruccion;
+    private String responsable;
+    private String validador_email;
+    private boolean operadaParcialmente;
+    private String estatus;
+    private String estatusDescripcion;
+    private LocalDateTime fechaModificacion;
+    private LocalDateTime fechaClasificacion;
+    private List<OperacionMonetariaDto> operaciones;
+    private boolean  prioritaria;
+    private String observaciones;
+    private boolean programada;
+    private LocalDateTime fechaCancelacion;
+    private LocalDateTime fechaAprobacion;
+    private boolean solicitudCorreccion;
+}
