@@ -22,6 +22,32 @@
     <java.version>17</java.version>
     <spring-cloud.version>2021.0.3</spring-cloud.version>
     <querydsl.version>5.0.0</querydsl.version>
+    <org-springframework-security.spring-security-ldap.version>6.4.11</org-springframework-security.spring-security-ldap.version>
+    <org-springframework-boot.spring-boot-starter-webflux.version>3.2.11</org-springframework-boot.spring-boot-starter-webflux.version>
+    <org-springframework-ldap.spring-ldap-core.version>3.3.4</org-springframework-ldap.spring-ldap-core.version>
+    <org-springframework-boot.spring-boot-starter-web.version>3.4.10</org-springframework-boot.spring-boot-starter-web.version>
+    <org-springframework-boot.spring-boot-devtools.version>3.3.11</org-springframework-boot.spring-boot-devtools.version>
+    <commons-collections.commons-collections.version>3.2.2</commons-collections.commons-collections.version>
+    <com-fasterxml-jackson-core.jackson-core.version>2.18.6</com-fasterxml-jackson-core.jackson-core.version>
+    <commons-fileupload.commons-fileupload.version>1.6.0</commons-fileupload.commons-fileupload.version>
+    <commons-lang.commons-lang.version>2.6</commons-lang.commons-lang.version>
+    <org-apache-commons.commons-lang3.version>3.18.0</org-apache-commons.commons-lang3.version>
+    <org-bouncycastle.bcpkix-jdk15on.version>1.79</org-bouncycastle.bcpkix-jdk15on.version>
+    <org-bouncycastle.bcprov-jdk15on.version>1.78</org-bouncycastle.bcprov-jdk15on.version>
+    <com-nimbusds.nimbus-jose-jwt.version>10.0.2</com-nimbusds.nimbus-jose-jwt.version>
+    <commons-io.commons-io.version>2.14.0</commons-io.commons-io.version>
+    <org-springframework-security.spring-security-config.version>5.7.14</org-springframework-security.spring-security-config.version>
+    <org-springframework-security.spring-security-web.version>5.7.14</org-springframework-security.spring-security-web.version>
+    <org-assertj.assertj-core.version>3.27.7</org-assertj.assertj-core.version>
+    <org-springframework.spring-webflux.version>5.3.41</org-springframework.spring-webflux.version>
+    <org-springframework.spring-webmvc.version>5.3.44</org-springframework.spring-webmvc.version>
+    <io-netty.netty-codec.version>4.1.125.Final</io-netty.netty-codec.version>
+    <io-netty.netty-codec-http.version>4.1.129.Final</io-netty.netty-codec-http.version>
+    <io-netty.netty-codec-http2.version>4.1.124.Final</io-netty.netty-codec-http2.version>
+    <io-netty.netty-handler.version>4.1.118.Final</io-netty.netty-handler.version>
+    <io-projectreactor-netty.reactor-netty-http.version>1.2.8</io-projectreactor-netty.reactor-netty-http.version>
+    <io-netty.netty-common.version>4.1.118.Final</io-netty.netty-common.version>
+    <org-springframework.spring-core.version>5.3.41</org-springframework.spring-core.version>
   </properties>
 
   <dependencies>
@@ -325,12 +351,142 @@
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.25</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.25</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-ldap</artifactId>
+        <version>${org-springframework-security.spring-security-ldap.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webflux</artifactId>
+        <version>${org-springframework-boot.spring-boot-starter-webflux.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.ldap</groupId>
+        <artifactId>spring-ldap-core</artifactId>
+        <version>${org-springframework-ldap.spring-ldap-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>${org-springframework-boot.spring-boot-starter-web.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <version>${org-springframework-boot.spring-boot-devtools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>${commons-collections.commons-collections.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${com-fasterxml-jackson-core.jackson-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>${commons-fileupload.commons-fileupload.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>${commons-lang.commons-lang.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${org-apache-commons.commons-lang3.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk15on</artifactId>
+        <version>${org-bouncycastle.bcpkix-jdk15on.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>${org-bouncycastle.bcprov-jdk15on.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>${com-nimbusds.nimbus-jose-jwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.commons-io.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>${org-springframework-security.spring-security-config.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${org-springframework-security.spring-security-web.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${org-assertj.assertj-core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webflux</artifactId>
+        <version>${org-springframework.spring-webflux.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${org-springframework.spring-webmvc.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec</artifactId>
+        <version>${io-netty.netty-codec.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec-http</artifactId>
+        <version>${io-netty.netty-codec-http.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec-http2</artifactId>
+        <version>${io-netty.netty-codec-http2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-handler</artifactId>
+        <version>${io-netty.netty-handler.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.projectreactor.netty</groupId>
+        <artifactId>reactor-netty-http</artifactId>
+        <version>${io-projectreactor-netty.reactor-netty-http.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-common</artifactId>
+        <version>${io-netty.netty-common.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${org-springframework.spring-core.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
