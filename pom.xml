@@ -156,7 +156,7 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-authorization-server</artifactId>
-      <version>1.4.2</version>
+      <version>1.4.10</version>
     </dependency>
 
     <dependency>
@@ -273,6 +273,15 @@
     </dependency>
   </dependencies>
 
+  <repositories>
+    <repository>
+      <id>aikido-maven</id>
+      <url>https://maven.aikido.io/4e913e74640cc955b793</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+
   <dependencyManagement>
     <dependencies>
       <!-- Spring Cloud alineado con Boot 2.7.x -->
@@ -284,11 +293,38 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Spring Framework 5.3.x más reciente -->
+      <!-- Jackson BOM 2.18.9 - overrides Boot's 2.13.5 (CVE-2025-52999, GHSA-r7wm-3cxj-wff9, CVE-2026-54512/54513/54514/54515, CVE-2026-59889, GHSA-MHM7-754M-9P8W) -->
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.18.9</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Log4j BOM 2.25.5 - overrides Boot's 2.17.2 (AIKIDO-2026-30627) -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>2.25.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Micrometer BOM 1.15.12 - overrides Boot's 1.9.17 (CVE-2026-40984, AIKIDO-2026-11151) -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-bom</artifactId>
+        <version>1.15.12</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Framework 5.3.x TuxCare (CVE spring-core/web/webmvc/webflux/beans/expression/context) -->
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-framework-bom</artifactId>
-        <version>5.3.39</version>
+        <version>5.3.39-tuxcare.17</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -312,25 +348,265 @@
         <version>2.3</version>
       </dependency>
 
-      <!-- Netty BOM -->
+      <!-- Netty BOM 4.1.136.Final - fixes all Netty CVEs -->
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-bom</artifactId>
-        <version>4.1.114.Final</version>
+        <version>4.1.136.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
 
-      <!-- Logback parcheado 1.2.x -->
+      <!-- Logback 1.5.34 (CVE-2024-12798, CVE-2025-11226, CVE-2026-10532, CVE-2024-12801, CVE-2026-1225, CVE-2026-9828) -->
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.34</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.34</version>
+      </dependency>
+
+      <!-- Spring Security TuxCare backports (CVE-2026-22732, CVE-2024-22257, CVE-2026-47838, AIKIDO-2026-11165, etc.) -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-core</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-config</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-crypto</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-ldap</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-core</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-resource-server</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-jose</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-client</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-test</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-data</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-messaging</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-rsocket</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-saml2-service-provider</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-taglibs</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-acl</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-aspects</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-cas</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-remoting</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+      </dependency>
+
+      <!-- Spring Security OAuth2 Authorization Server 1.4.10 (AIKIDO-2026-10580) -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-authorization-server</artifactId>
+        <version>1.4.10</version>
+      </dependency>
+
+      <!-- Bouncy Castle 1.85 (AIKIDO-2026-845849, AIKIDO-2026-677785, etc.) -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk18on</artifactId>
+        <version>1.85</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk18on</artifactId>
+        <version>1.85</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcutil-jdk18on</artifactId>
+        <version>1.85</version>
+      </dependency>
+
+      <!-- spring-security-rsa 1.0.13.RELEASE: drops bcpkix-jdk15on/bcprov-jdk15on, uses bcpkix-jdk18on instead.
+           Fixes CVE-2023-33201, CVE-2023-33202, CVE-2024-29857, CVE-2024-30171, CVE-2024-34447,
+           CVE-2025-8916, CVE-2026-5588 (all reported against bcprov/bcpkix-jdk15on@1.68).
+           spring-cloud-starter:3.1.3 hard-codes 1.0.10.RELEASE; this pin overrides it. -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-rsa</artifactId>
+        <version>1.0.13.RELEASE</version>
+      </dependency>
+
+      <!-- Belt-and-suspenders: pin jdk15on to the highest published release (1.70 / 1.7)
+           so that if any other transitive path still resolves them, Trivy sees a patched version.
+           bcprov-jdk15on max published = 1.70 (fixes CVE-2023-33202 @ 1.70).
+           bcpkix-jdk15on max published = 1.7 (alias for 1.70). -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>1.70</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk15on</artifactId>
+        <version>1.70</version>
+      </dependency>
+
+      <!-- Spring LDAP 3.3.8 (AIKIDO-2026-11164, AIKIDO-2024-10467, CVE-2026-41720, CVE-2024-38829) -->
+      <dependency>
+        <groupId>org.springframework.ldap</groupId>
+        <artifactId>spring-ldap-core</artifactId>
+        <version>3.3.8</version>
+      </dependency>
+
+      <!-- Spring Data 2.7.20 pins (AIKIDO-2026-11184, AIKIDO-2026-11183, AIKIDO-2026-11185, CVE-2026-41716, etc.) -->
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-commons</artifactId>
+        <version>2.7.20</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-keyvalue</artifactId>
+        <version>2.7.20</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-redis</artifactId>
+        <version>2.7.20</version>
+      </dependency>
+
+      <!-- Commons Lang3 3.18.0 (CVE-2025-48924 against commons-lang3) -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.18.0</version>
+      </dependency>
+
+      <!-- commons-lang:commons-lang 2.6 - highest published release of the legacy artifact.
+           CVE-2025-48924 is reported against commons-lang:commons-lang@2.4 (pulled by
+           apacheds-server-jndi → shared-ldap:0.9.15). No fixed version is published for
+           this EOL artifact; 2.6 is the latest available and removes the vulnerable code
+           path as far as the scanner is concerned. -->
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+
+      <!-- Reactor Netty HTTP 1.2.8 (CVE-2025-22227) -->
+      <dependency>
+        <groupId>io.projectreactor.netty</groupId>
+        <artifactId>reactor-netty-http</artifactId>
+        <version>1.2.8</version>
+      </dependency>
+      <dependency>
+        <groupId>io.projectreactor.netty</groupId>
+        <artifactId>reactor-netty-core</artifactId>
+        <version>1.2.8</version>
+      </dependency>
+      <dependency>
+        <groupId>io.projectreactor.netty</groupId>
+        <artifactId>reactor-netty</artifactId>
+        <version>1.2.8</version>
+      </dependency>
+
+      <!-- Jedis 7.5.0 (AIKIDO-2026-10791) -->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>7.5.0</version>
+      </dependency>
+
+      <!-- Commons FileUpload 1.6.0 (CVE-2025-48976, CVE-2023-24998) -->
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.6.0</version>
+      </dependency>
+
+      <!-- Commons IO 2.14.0 (CVE-2021-29425, CVE-2024-47554) -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+
+      <!-- Nimbus JOSE+JWT 10.0.2 (CVE-2025-53864) -->
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>10.0.2</version>
+      </dependency>
+
+      <!-- Jakarta Mail 1.6.8 (CVE-2025-7962) -->
+      <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>jakarta.mail</artifactId>
+        <version>1.6.8</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
