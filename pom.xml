@@ -156,7 +156,7 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-authorization-server</artifactId>
-      <version>1.4.2</version>
+      <version>1.4.10</version>
     </dependency>
 
     <dependency>
@@ -273,6 +273,13 @@
     </dependency>
   </dependencies>
 
+  <repositories>
+    <repository>
+      <id>aikido-maven</id>
+      <url>https://maven.aikido.io/4e913e74640cc955b793</url>
+    </repository>
+  </repositories>
+
   <dependencyManagement>
     <dependencies>
       <!-- Spring Cloud alineado con Boot 2.7.x -->
@@ -284,11 +291,20 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Spring Framework 5.3.x más reciente -->
+      <!-- Spring Security BOM (TuxCare backport) - must precede spring-boot-dependencies -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-bom</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Framework 5.3.x más reciente (TuxCare backport) -->
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-framework-bom</artifactId>
-        <version>5.3.39</version>
+        <version>5.3.39-tuxcare.17</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -316,21 +332,150 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-bom</artifactId>
-        <version>4.1.114.Final</version>
+        <version>4.1.136.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
 
-      <!-- Logback parcheado 1.2.x -->
+      <!-- Logback parcheado -->
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.34</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.34</version>
+      </dependency>
+
+      <!-- Jackson BOM -->
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.18.9</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Micrometer BOM -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-bom</artifactId>
+        <version>1.15.12</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Reactor BOM (reactor-netty-http 1.2.8) -->
+      <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-bom</artifactId>
+        <version>2024.0.8</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Log4j BOM -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>2.25.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring LDAP -->
+      <dependency>
+        <groupId>org.springframework.ldap</groupId>
+        <artifactId>spring-ldap-core</artifactId>
+        <version>3.3.8</version>
+      </dependency>
+
+      <!-- Spring Data overrides -->
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-commons</artifactId>
+        <version>3.5.12</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-keyvalue</artifactId>
+        <version>3.5.12</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-redis</artifactId>
+        <version>3.5.12</version>
+      </dependency>
+
+      <!-- Jedis -->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>7.5.0</version>
+      </dependency>
+
+      <!-- Jakarta Mail -->
+      <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>jakarta.mail</artifactId>
+        <version>1.6.8</version>
+      </dependency>
+
+      <!-- Commons FileUpload -->
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.6.0</version>
+      </dependency>
+
+      <!-- Commons IO -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+
+      <!-- Commons Lang3 -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.18.0</version>
+      </dependency>
+
+      <!-- Bouncy Castle -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk18on</artifactId>
+        <version>1.85</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk18on</artifactId>
+        <version>1.85</version>
+      </dependency>
+      <!-- Pin spring-security-rsa to a version that uses bcprov-jdk18on
+           (not the abandoned bcpkix-jdk15on/bcprov-jdk15on coordinates),
+           so the bcprov-jdk18on:1.85 pin above takes effect transitively -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-rsa</artifactId>
+        <version>1.1.5</version>
+      </dependency>
+
+      <!-- commons-lang (legacy coordinate, highest available release) -->
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+
+      <!-- Nimbus JOSE+JWT -->
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>10.0.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
