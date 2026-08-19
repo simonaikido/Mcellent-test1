@@ -156,7 +156,7 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-authorization-server</artifactId>
-      <version>1.4.2</version>
+      <version>1.4.10</version>
     </dependency>
 
     <dependency>
@@ -284,11 +284,56 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- Spring Framework 5.3.x más reciente -->
+      <!-- Spring Framework 5.3.x TuxCare backport (Aikido repo) -->
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-framework-bom</artifactId>
-        <version>5.3.39</version>
+        <version>5.3.39-tuxcare.17</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Security TuxCare backport (Aikido repo) — must precede Boot-managed BOM -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-bom</artifactId>
+        <version>5.8.16-tuxcare.13</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Jackson BOM — overrides Boot-managed 2.13.5 -->
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.18.9</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Micrometer BOM — overrides Boot-managed 1.9.17 -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-bom</artifactId>
+        <version>1.15.12</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Data BOM — overrides Boot-managed 2021.2.18; provides spring-data-commons:3.5.12 -->
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-bom</artifactId>
+        <version>2025.0.12</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Reactor BOM — overrides Boot-managed 2020.0.38; provides reactor-netty-http:1.2.8 -->
+      <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-bom</artifactId>
+        <version>2024.0.8</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -312,28 +357,189 @@
         <version>2.3</version>
       </dependency>
 
-      <!-- Netty BOM -->
+      <!-- Netty BOM — 4.1.137.Final fixes all Netty CVEs -->
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-bom</artifactId>
-        <version>4.1.114.Final</version>
+        <version>4.1.137.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
 
-      <!-- Logback parcheado 1.2.x -->
+      <!-- Log4j BOM — 2.25.5 fixes CVE-2026-30627 / CVE-2026-49844 -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>2.25.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Logback — 1.5.34 fixes all Logback CVEs -->
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.34</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
-        <version>1.2.13</version>
+        <version>1.5.34</version>
+      </dependency>
+
+      <!-- BouncyCastle — 1.85 fixes AIKIDO-2026-845849 and related -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk18on</artifactId>
+        <version>1.85</version>
+      </dependency>
+
+      <!-- bcprov-jdk15on — pin to highest available (1.70) for any remaining old-coordinate consumers -->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>1.70</version>
+      </dependency>
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcpkix-jdk15on</artifactId>
+        <version>1.70</version>
+      </dependency>
+
+      <!-- spring-security-rsa — upgrade to 1.1.5 which uses bcprov-jdk18on (new coordinate) -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-rsa</artifactId>
+        <version>1.1.5</version>
+      </dependency>
+
+      <!-- commons-fileupload — 1.6.0 fixes CVE-2025-48976 / CVE-2023-24998 -->
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.6.0</version>
+      </dependency>
+
+      <!-- Spring LDAP — 3.3.8 fixes AIKIDO-2026-11164 / CVE-2026-41720 -->
+      <dependency>
+        <groupId>org.springframework.ldap</groupId>
+        <artifactId>spring-ldap-core</artifactId>
+        <version>3.3.8</version>
+      </dependency>
+
+      <!-- commons-lang3 — 3.18.0 fixes CVE-2025-48924 -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.18.0</version>
+      </dependency>
+
+      <!-- Nimbus JOSE+JWT — 10.0.2 fixes CVE-2025-53864 -->
+      <dependency>
+        <groupId>com.nimbusds</groupId>
+        <artifactId>nimbus-jose-jwt</artifactId>
+        <version>10.0.2</version>
+      </dependency>
+
+      <!-- commons-io — 2.14.0 fixes CVE-2021-29425 / CVE-2024-47554 -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+
+      <!-- Jedis — 7.5.0 fixes AIKIDO-2026-10791 -->
+      <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>7.5.0</version>
+      </dependency>
+
+      <!-- Jakarta Mail — 1.6.8 fixes CVE-2025-7962 -->
+      <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>jakarta.mail</artifactId>
+        <version>1.6.8</version>
+      </dependency>
+
+      <!-- Spring Security OAuth2 Authorization Server — 1.4.10 fixes AIKIDO-2026-10580 -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-authorization-server</artifactId>
+        <version>1.4.10</version>
+      </dependency>
+
+      <!--
+        spring-security-crypto: the TuxCare spring-security-bom:5.8.16-tuxcare.13 pins
+        spring-security-crypto at 5.8.16-tuxcare.13, which Trivy does not recognise as
+        patched for CVE-2025-22228 (Trivy minimum: 5.8.18). spring-security-crypto has no
+        TuxCare backport of its own in the Updates list, so we pin it to the smallest
+        public release that satisfies the fix. 5.8.18 is compatible with the rest of the
+        5.8.x Spring Security family managed by the TuxCare BOM.
+      -->
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-crypto</artifactId>
+        <version>5.8.18</version>
+      </dependency>
+
+      <!--
+        Spring Boot TuxCare backports (Aikido repo) — fixes CVE-2025-22235,
+        CVE-2026-22733, CVE-2026-40973. The parent POM remains spring-boot-starter-parent
+        2.7.18 (no tuxcare variant of the parent exists); these dependencyManagement pins
+        override the individual Boot artifact versions so Trivy sees the patched builds.
+      -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>2.7.18-tuxcare.19</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+        <version>2.7.18-tuxcare.19</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-autoconfigure</artifactId>
+        <version>2.7.18-tuxcare.19</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-actuator</artifactId>
+        <version>2.7.18-tuxcare.19</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+        <version>2.7.18-tuxcare.19</version>
+      </dependency>
+
+      <!--
+        commons-lang:commons-lang (legacy coordinate, distinct from commons-lang3).
+        Pulled in transitively at 2.4 via apacheds-server-jndi → shared-ldap.
+        CVE-2025-48924 is reported against this artifact; Trivy lists no fixed version,
+        meaning no patched release exists under the commons-lang:commons-lang coordinate
+        (the project was abandoned in favour of org.apache.commons:commons-lang3).
+        Pinning to 2.6 (the highest published release) is the best available mitigation
+        within this coordinate; a full fix would require replacing apacheds-server-jndi
+        with a maintained alternative, which is a breaking application change outside
+        the scope of this dependency-update task.
+      -->
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>aikido-maven</id>
+      <url>https://maven.aikido.io/4e913e74640cc955b793</url>
+    </repository>
+  </repositories>
 
   <build>
     <plugins>
