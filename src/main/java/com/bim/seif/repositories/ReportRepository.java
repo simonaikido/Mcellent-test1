@@ -143,14 +143,15 @@ public class ReportRepository {
         }
         Sort sort = pageable.getSort();
         String orderBy = sort.stream()
-                .map(o -> alias + "." + sanitizeProperty(o.getProperty()) + " " + (o.isAscending() ? "asc" : "desc"))
+                .map(o -> {
+                    String property = o.getProperty();
+                    if (property == null || !property.matches("^[a-zA-Z0-9_.]+$")) {
+                        throw new IllegalArgumentException("Invalid property name");
+                    }
+                    String direction = o.isAscending() ? "ASC" : "DESC";
+                    return alias + "." + property + " " + direction;
+                })
                 .collect(Collectors.joining(", "));
         return " order by " + (orderBy.isEmpty() ? (alias + ".id asc") : orderBy);
-    }
-
-    // Limpia el nombre de propiedad para evitar inyección en ORDER BY
-    private String sanitizeProperty(String prop) {
-        // Permite letras, números y puntos (para nested props), quita el resto.
-        return prop == null ? "id" : prop.replaceAll("[^A-Za-z0-9_.]", "");
     }
 }
