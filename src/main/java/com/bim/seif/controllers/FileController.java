@@ -66,6 +66,9 @@ public class FileController {
         log.info("Solicitud de descarga de archivo (FTP) por usuario {}: {}", jwt.getSubject(), nombreArchivo);
 
         try {
+            if (nombreArchivo.contains("..")) {
+                throw new IllegalArgumentException("Invalid file path");
+            }
             //nombre limpio + MIME + Content-Disposition correcto
             String onlyName = java.nio.file.Paths.get(nombreArchivo.replace('\\', '/'))
                     .getFileName().toString();
